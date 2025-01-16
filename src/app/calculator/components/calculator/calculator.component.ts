@@ -6,6 +6,7 @@ import { CalculatorButtonComponent } from '../calculator-button/calculator-butto
   imports: [CalculatorButtonComponent],
   templateUrl: './calculator.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrl: './calculator.component.css',
 })
 export class CalculatorComponent {
 

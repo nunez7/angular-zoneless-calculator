@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'calculator-button',
@@ -8,7 +8,8 @@ import { ChangeDetectionStrategy, Component, HostBinding, input } from '@angular
   styleUrl: './calculator.button.component.css',
   host:{
     class: 'w-1/4 border-r border-b border-indigo-400'
-  }
+  },
+  //: ViewEncapsulation.None
 })
 export class CalculatorButtonComponent {
 
@@ -17,9 +18,9 @@ export class CalculatorButtonComponent {
     typeof value === 'string' ? value === '' : value
   });
 
-  @HostBinding('class.is-command') get commandStyle(){
+  /*@HostBinding('class.is-command') get commandStyle(){
     return this.isCommand();
-  }
+  }*/
 
 }
 
