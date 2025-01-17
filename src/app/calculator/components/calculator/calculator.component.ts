@@ -22,13 +22,24 @@ export class CalculatorComponent {
   //@HostListener('document:keyup', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent){
 
+    const keyEquivalents: Record<string, string> = {
+      Escape: 'C',
+      Clear: 'C',
+      NumLock: 'C',
+      '*': 'x',
+      '/': '÷',
+      Enter: '=',
+    }
+    
     const key = event.key;
+    const keyValue = keyEquivalents[key] ?? key;
+
 
     //Llamamos el evento de buttons
-    this.handleClick(key);
+    this.handleClick(keyValue);
 
     this.calculatorButtons().forEach(button => {
-        button.keyboardPressedStyle(key);
+        button.keyboardPressedStyle(keyValue);
     });
   }
    
