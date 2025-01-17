@@ -1,4 +1,6 @@
-import { Component, ChangeDetectionStrategy, HostListener, viewChildren } from '@angular/core';
+import { CalculatorService } from '@/calculator/services/calculator.service';
+import { computeMsgId } from '@angular/compiler';
+import { Component, ChangeDetectionStrategy, HostListener, viewChildren, inject, computed } from '@angular/core';
 import { CalculatorButtonComponent } from '../calculator-button/calculator-button.component';
 
 @Component({
@@ -12,6 +14,16 @@ import { CalculatorButtonComponent } from '../calculator-button/calculator-butto
   }
 })
 export class CalculatorComponent {
+
+  private calculatorService = inject(CalculatorService);
+
+  /*get resultText(){
+    return this.calculatorService.resultText;
+  }*/
+
+  public resultText = computed(()=> this.calculatorService.resultText() );
+  public lastOperator = computed(()=> this.calculatorService.lastOperator());
+  public subResultText = computed(()=> this.calculatorService.subResultText());
 
   public calculatorButtons = viewChildren(CalculatorButtonComponent);
 
