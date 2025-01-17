@@ -2,6 +2,17 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CalculatorButtonComponent } from './calculator-button.component';
 import { Component } from '@angular/core';
 
+@Component({
+    standalone: true,
+    imports: [CalculatorButtonComponent],
+    template: `
+      <calculator-button>
+        <span class="projected-content underline">Test content</span>
+      </calculator-button>
+    `,
+  })
+  class TestHostComponent {}
+
 describe('CalculatorButtonComponent', () => {
     let fixture: ComponentFixture<CalculatorButtonComponent>;
     let compiled: HTMLElement;
@@ -62,6 +73,24 @@ describe('CalculatorButtonComponent', () => {
           //done sirve para decirle que se espere a que responda el clic y luego continue
           done();
         }, 101);
+      });
+
+      it('Should not set isPressed to true if key is not matching', () => {
+        component.contentValue()!.nativeElement.innerText = '1';
+        component.keyboardPressedStyle('2');
+    
+        expect(component.isPressed()).toBeFalse();
+      });
+    
+      //Contenido proyectado
+      it('Should display projected content', () => {
+        const testHostFixture = TestBed.createComponent(TestHostComponent);
+    
+        const compiled = testHostFixture.nativeElement as HTMLDivElement;
+        const projectedContent = compiled.querySelector('.projected-content');
+    
+        expect(projectedContent).not.toBeNull();
+        expect(projectedContent?.classList.contains('underline')).toBeTrue();
       });
     
 
