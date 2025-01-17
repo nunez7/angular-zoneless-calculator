@@ -38,7 +38,7 @@ export class CalculatorComponent {
       Escape: 'C',
       Clear: 'C',
       NumLock: 'C',
-      '*': 'x',
+      'x': '*',
       '/': '÷',
       Enter: '=',
     }
