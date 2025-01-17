@@ -41,5 +41,28 @@ describe('CalculatorButtonComponent', () => {
         expect(component.isDoubleSize()).toBeTrue();
     });
     
+    it('Should emit onClick when handleClick is called', () => {
+        // Espías
+        spyOn(component.onClick, 'emit');
+    
+        component.handleClick();
+    
+        expect(component.onClick.emit).toHaveBeenCalled();
+        // expect(component.onClick.emit).toHaveBeenCalledWith('1');
+    });
+
+    it('Should set isPressed to true and then false when keyboardPressStyle is called with a matching key', (done) => {
+        component.contentValue()!.nativeElement.innerText = '1';
+        component.keyboardPressedStyle('1');
+    
+        expect(component.isPressed()).toBe(true);
+    
+        setTimeout(() => {
+          expect(component.isPressed()).toBeFalse();
+          //done sirve para decirle que se espere a que responda el clic y luego continue
+          done();
+        }, 101);
+      });
+    
 
 });
