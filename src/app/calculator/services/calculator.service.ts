@@ -14,7 +14,7 @@ export class CalculatorService {
   public lastOperator = signal('+');
 
   public constructNumber(value: string): void{
-    if(![...numbers, ...operators, ...specialOperators].includes(value)){
+    if (![...numbers, ...operators, ...specialOperators].includes(value)) {
       console.log('Invalid input', value);
       return;
     }
@@ -36,17 +36,11 @@ export class CalculatorService {
     //Backspace
     //TODO: revisar numeros negativos
     if( value === 'Backspace'){
-      if(this.resultText() === '0')  return;
-      /*if(this.resultText() === '-0') {
-        this.resultText.set('0');
-        return;
-      }*/
-
-      if(this.resultText().includes('-') && this.resultText().length===2){
+      if (this.resultText() === '0') return;
+      if (this.resultText().includes('-') && this.resultText().length === 2) {
         this.resultText.set('0');
         return;
       }
-
 
       if(this.resultText().length === 1){
         this.resultText.set('0');
@@ -58,8 +52,8 @@ export class CalculatorService {
     }
 
     //Aplicar operadores
-    if(operators.includes(value)){
-      //this.calculateResult();
+    if (operators.includes(value)) {
+      // this.calculateResult();
 
       this.lastOperator.set(value);
       this.subResultText.set(this.resultText());
@@ -73,13 +67,12 @@ export class CalculatorService {
     }
 
     //Validar punto decimal
-    if(value === '.' && this.resultText().includes('.')){
-      if(this.resultText() === '0' || this.resultText() === ''){
+    if (value === '.' && !this.resultText().includes('.')) {
+      if (this.resultText() === '0' || this.resultText() === '') {
         this.resultText.set('0.');
         return;
       }
-      
-      this.resultText.update(text => text + '.');
+      this.resultText.update((text) => text + '.');
       return;
     }
 
@@ -95,27 +88,25 @@ export class CalculatorService {
         return;
       }
 
-      this.resultText.update(text => '-'+text);
+      this.resultText.update((text) => '-' + text);
       return;
     }
 
     //Numeros
     if(numbers.includes(value)){
-      if(this.resultText() === '0' || this.resultText()==='-0'){
-
-        if(this.resultText().includes('-')){
-          this.resultText.set('-'+value);
-          return;
-        }
-
+      if (this.resultText() === '0') {
         this.resultText.set(value);
         return;
       }
+
+      if (this.resultText() === '-0') {
+        this.resultText.set('-' + value);
+        return;
+      }
+
+      this.resultText.update((text) => text + value);
+      return;
     }
-
-
-    this.resultText.update(text => text + value);
-    return;
   }
 
   public calculateResult(){
