@@ -64,6 +64,7 @@ export class CalculatorService {
     //Limitar numero de caracteres
     if(this.resultText().length >= 10){
       console.log('Max Lenght Reached');
+      return;
     }
 
     //Validar punto decimal
