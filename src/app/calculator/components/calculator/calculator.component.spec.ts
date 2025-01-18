@@ -64,5 +64,22 @@ describe('CalculatorComponent', () => {
         expect(component.lastOperator()).toBe('*');
     });
 
+    it('Should have 19 calculator-button components', () => {
+        expect(component.calculatorButtons()).toBeTruthy();
+        expect(component.calculatorButtons().length).toBe(19);
+    });
+
+    it('Should have 19 calculator-button with content projection', () => {
+        // const buttonsByDirective = fixture.debugElement.queryAll(
+        //   By.directive(CalculatorButtonComponent)
+        // );
     
+        const buttons = compiled.querySelectorAll('calculator-button');
+        expect(buttons.length).toBe(19);
+    
+        expect(buttons[0].textContent?.trim()).toBe('C');
+        expect(buttons[1].textContent?.trim()).toBe('+/-');
+        expect(buttons[2].textContent?.trim()).toBe('%');
+        expect(buttons[3].textContent?.trim()).toBe('÷');
+      });
 });  
